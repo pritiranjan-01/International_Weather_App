@@ -14,8 +14,12 @@ import com.qsp.modelmapper.ResponseEntityMapper;
 import com.qsp.modelmapper.ResponseStructureModelMapper;
 import com.qsp.service.WeatherService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/InternationalWeather")
+@Tag(name = "/weather", description = "View all and single Weather")
 public class InternationalWeatherController {
 	
 	@Autowired
@@ -28,6 +32,7 @@ public class InternationalWeatherController {
 	private ResponseEntityMapper mapper;
 
 	@GetMapping("/{city}")
+	@Operation(summary = "Get Single international weather by City Name")
 	public ResponseEntity<ResponseStructure<WeatherDTO>> 
 								getWeatherByCity(@PathVariable String city){
 		WeatherDTO dto = weatherService.getSingleWeather(city);
@@ -37,6 +42,7 @@ public class InternationalWeatherController {
 	}
 	
 	@GetMapping
+	@Operation(summary = "Get all international weather")
 	public ResponseEntity<ResponseStructure<Map<String, WeatherDTO>>> getAllWeather(){
 		Map<String, WeatherDTO> map = weatherService.getAllInternationalWeather();
 		ResponseStructure<Map<String, WeatherDTO>> structure = structureMapper

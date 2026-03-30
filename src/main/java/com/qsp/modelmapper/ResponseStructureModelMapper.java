@@ -2,15 +2,12 @@ package com.qsp.modelmapper;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+
 import com.qsp.dto.ResponseStructure;
-
-
 
 @Component
 public class ResponseStructureModelMapper {
-	
-	public <T> ResponseStructure<T> mapToResponseStructure
-							(HttpStatus httpStatus, String type, T payload){
+	public <T> ResponseStructure<T> mapToResponseStructure(HttpStatus httpStatus, String type, T payload){
 		ResponseStructure<T> structure = ResponseStructure.<T>builder()
 													 .status(true)
 													 .payload(payload)
@@ -18,6 +15,5 @@ public class ResponseStructureModelMapper {
 													 .type(type)
 													 .build();
 		return structure;
-		
 	}
 }
